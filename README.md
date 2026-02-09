@@ -1,39 +1,71 @@
-# digital-forensics-investigations
-Academic Digital Forensics Case Investigations (Disk, Network &amp; Memory Analysis)
 # 🔍 Digital Forensics Investigation Portfolio
 
-This repository contains academic digital forensics investigations completed as part of my MSc in Cybersecurity and Digital Forensics.
+This repository showcases practical **digital forensics investigations** completed as part of my MSc in Cybersecurity and Digital Forensics. Each case demonstrates real-world forensic techniques used in incident response and cybercrime investigations.
 
-These cases demonstrate practical skills in:
-
-- Disk Forensics
-- Network Traffic Analysis
-- Memory Forensics
-- Malware Investigation
-- Evidence Handling & Reporting
-
-⚠️ All investigations are based on **simulated academic scenarios**.
+⚠️ All cases are based on **simulated academic scenarios** and contain no real personal or confidential data.
 
 ---
 
-## 📁 Cases Included
+## 🧠 Skills Demonstrated
 
-### 🏦 Bank Fraud Case (Disk Forensics)
-Analysis of a seized USB device involving encrypted files, steganography traces, and suspicious executables.
-
-### 🌐 Network Malware Case (Network Forensics)
-Investigation of malware infection using PCAP traffic to identify C2 servers and exfiltration behaviour.
-
-### 📄 Bad PDF Malware Case (Memory Forensics)
-Memory analysis of a compromised machine infected through a malicious PDF attachment.
-
----
-
-## 🛠 Tools Used
-
-Autopsy • FTK Imager • Volatility • Wireshark • John the Ripper • Steghide • Binwalk • Strings
+- Disk Forensics & File Recovery  
+- Memory Forensics & Malware Analysis  
+- Network Traffic Analysis (PCAP)  
+- Encryption & Password Cracking  
+- Steganography Detection  
+- Timeline & Artifact Analysis  
+- Evidence Handling & Reporting  
 
 ---
 
-👨‍💻 Author: Rohit  
-🎓 MSc Cybersecurity & Digital Forensics
+## 📁 Case Studies
+
+### 🏦 Bank Fraud Investigation (Disk Forensics)
+A forensic investigation of a seized USB device linked to suspected internal financial data theft.
+
+**Highlights**
+- Recovered deleted and hidden files  
+- Identified disguised executables  
+- Detected encrypted archives  
+- Cracked passwords using John the Ripper  
+- Discovered sensitive financial records  
+
+**Tools Used:** Autopsy, FTK Imager, Steghide, Binwalk, John the Ripper  
+
+---
+
+### 🌐 Network Malware Investigation (Network Forensics)
+Analysis of captured network traffic to identify malware infection and command-and-control (C2) communication.
+
+**Highlights**
+- Malware family identified (Agent Tesla / Raccoon Stealer)  
+- C2 server IP addresses discovered  
+- Data exfiltration via HTTP POST requests  
+- Infected host details extracted  
+
+**Tools Used:** Wireshark, Network Protocol Analysis  
+
+---
+
+### 📄 Malicious PDF Case (Memory Forensics)
+Memory analysis of an infected machine compromised after opening a malicious PDF attachment.
+
+**Highlights**
+- Malicious process traced to Adobe Reader exploit  
+- Suspicious external connections identified  
+- Banking phishing URLs recovered from memory  
+- Evidence of credential-stealing malware  
+
+**Tools Used:** Volatility, Strings, Memory Analysis Utilities  
+
+---
+
+## 🛠 Forensic Tools & Technologies
+
+Autopsy • FTK Imager • Volatility • Wireshark • John the Ripper • Steghide • Binwalk • Windows & Linux Forensic Environments  
+
+---
+
+👨‍💻 **Author:** Rohit  
+🎓 MSc Cybersecurity & Digital Forensics  
+🔐 Interests: Digital Forensics | Incident Response | Malware Analysis
