@@ -243,6 +243,6 @@ A disguised Word document containing a **CONFIDENTIAL - INTERNAL AUDIT REPORT** 
 
 ---
 
-> ⚠️ This investigation is based on a **simulated academic scenario**. No real financial data or personal information is involved.
+> ⚠️ This investigation is based on a **simulated academic scenario**.
 
 [← Back to Portfolio](../README.md)
