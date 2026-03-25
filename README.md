@@ -1,5 +1,16 @@
 <div align="center">
 
+```
+██████╗ ███████╗██╗██████╗ 
+██╔══██╗██╔════╝██║██╔══██╗
+██║  ██║█████╗  ██║██████╔╝
+██║  ██║██╔══╝  ██║██╔══██╗
+██████╔╝██║     ██║██║  ██║
+╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝
+
+D F I R   —   D I G I T A L   F O R E N S I C S  &  I N C I D E N T   R E S P O N S E
+```
+
 # 🔍 Digital Forensics Investigation Portfolio
 
 **MSc Cybersecurity, Threat Intelligence & Digital Forensics**  
@@ -27,15 +38,6 @@ This repository documents practical digital forensics investigations completed a
 
 ---
 
-## 🚀 Key Highlights
-- 🧪 3 Full DFIR Investigations (Disk, Network, Memory)
-- 🧠 Hands-on with Volatility, Wireshark, Autopsy
-- 🎯 MITRE ATT&CK mapping across all cases
-- 🔍 Real-world SOC-style reporting
-
----
-
-
 ## 🧠 Skills Demonstrated
 
 | Discipline | Tools Used | Key Techniques |
@@ -55,19 +57,18 @@ This repository documents practical digital forensics investigations completed a
 
 ### 🏦 Case 1 — Bank Fraud Investigation (Disk Forensics)
 
-**Evidence:** Seized USB device (`bank_fraud.001` / `.002`)  
-**Objective:** Identify hidden, encrypted, and suspicious files indicating internal data exfiltration  
+> **Evidence:** Seized USB device (`bank_fraud.001` / `.002`) from a bank manager's laptop
+> **Objective:** Identify hidden, encrypted, and suspicious files indicating internal data exfiltration
 
-#### 🔍 Key Findings:
-- Recovered **21 files** including disguised executables and encrypted archives  
-- Cracked shared password **`langley`** using John the Ripper  
-- Detected **OpenPGP key fragments** in images via `zsteg`  
-- Identified disguised executable containing **confidential bank audit report**  
-- Found **$5,550,000** in suspicious transactions  
-- Detected **timestamp tampering** via `bulkfilechanger-x64`  
-- Found multiple cloned executables indicating **dropper obfuscation**  
+**Key Findings:**
+- Recovered **21 files** from forensic image including disguised executables and encrypted archives
+- Cracked shared password **`langley`** across `Transfers.xlsx` and `confidential_Archive1.zip` using John the Ripper
+- Detected **OpenPGP key fragments** embedded in `bird.png` and `bird2.png` via `zsteg`
+- Identified `Transaction_Report.exe` disguised as `.docx` — contained a **confidential GrandBay Commercial Bank audit report** with 5 suspicious international transactions totalling **$5,550,000**
+- Uncovered `bulkfilechanger-x64` tool indicating **anti-forensic timestamp tampering**
+- Found **5 cloned `ios.exe` copies** consistent with dropper obfuscation
 
-**Tools:** Autopsy · FTK Imager · John the Ripper · zsteg · Steghide · Binwalk  
+**Tools:** `Autopsy 4.22.1` · `FTK Imager` · `John the Ripper` · `office2john` · `zsteg` · `Steghide` · `Binwalk`
 
 📂 [→ View Full Disk Forensics Investigation](./Disk-Forensics-Investigation/)
 
@@ -75,19 +76,19 @@ This repository documents practical digital forensics investigations completed a
 
 ### 🌐 Case 2 — Network Malware Investigation (Network Forensics)
 
-**Evidence:** `malware-traffic-analysis.pcap`  
-**Objective:** Identify malware family, C2 infrastructure, and exfiltration method  
+> **Evidence:** Network packet capture — `malware-traffic-analysis.pcap`
+> **Objective:** Identify malware family, C2 infrastructure, and data exfiltration method
 
-#### 🔍 Key Findings:
-- Identified malware: **Agent Tesla / Raccoon Stealer**  
-- Primary C2: **45.141.59.212**  
-- Secondary infrastructure identified  
-- Infected host: **Windows 10 system**  
-- Extracted DLL hash: `A4801B519365B27E563BF48CAE82BD58`  
-- Detected exfiltration via **HTTP POST requests**  
-- Mapped to **MITRE ATT&CK techniques**  
+**Key Findings:**
+- Identified malware family as **Agent Tesla / Raccoon Stealer** from URL signature pattern
+- Primary C2 server: **`45.141.59.212`** — confirmed malicious on VirusTotal
+- Secondary C2: `186.47.209.222` | Payload host: `43.240.64.184` (served `diego.png` loader)
+- Infected host: **`DESKTOP-3KI6Y6G`** running **Windows 10 Build 19042**
+- DLL hash extracted from POST URL: `A4801B519365B27E563BF48CAE82BD58`
+- Detected data exfiltration via **repeated HTTP POST requests on port 80**
+- Mapped to **5 MITRE ATT&CK techniques** including T1071.001, T1105, T1041
 
-**Tools:** Wireshark · VirusTotal  
+**Tools:** `Wireshark` · `VirusTotal` · `HTTP/DNS/TLS protocol analysis`
 
 📂 [→ View Full Network Forensics Investigation](./Network-Traffic-Investigation/)
 
@@ -95,18 +96,18 @@ This repository documents practical digital forensics investigations completed a
 
 ### 📄 Case 3 — Malicious PDF Investigation (Memory Forensics)
 
-**Evidence:** `BF.vmem` (Windows XP memory dump)  
-**Objective:** Identify malware activity and credential theft  
+> **Evidence:** VM memory dump — `BF.vmem` (Windows XP SP2 x86)
+> **Objective:** Identify malware, suspicious processes, C2 connections, and credential theft
 
-#### 🔍 Key Findings:
-- Exploit via **AcroRd32.exe (PID 1752)**  
-- Detected **C2 connections**  
-- Recovered phishing URLs from memory  
-- Identified **fake system processes**  
-- Extracted **user password hashes**  
-- Evidence of **DLL injection**  
+**Key Findings:**
+- Identified **`AcroRd32.exe` (PID 1752)** as initial exploit vector — confirmed by Volatility `malfind`
+- Suspicious outbound C2: **`AcroRd32.exe → 212.150.164.203:80`** and **`svchost.exe → 193.104.22.71:80`**
+- Recovered banking phishing URLs from memory: `http://secure-paypal.com/login`, `https://www.bank-login.com`
+- Detected **fake system processes**: `expl0rer.exe` and `svch0st.exe` masquerading as legitimate Windows processes
+- Extracted **password hashes** for Administrator, Guest, HelpAssistant, and SUPPORT accounts via `hashdump`
+- Evidence of **DLL injection** into running processes for persistence
 
-**Tools:** Volatility · Strings64 · malfind · hashdump  
+**Tools:** `Volatility 2.6` · `Strings64` · `Windows Findstr` · `malfind` · `hashdump`
 
 📂 [→ View Full Memory Forensics Investigation](./Memory-Forensics-Investigation/)
 
@@ -115,31 +116,34 @@ This repository documents practical digital forensics investigations completed a
 ## 🛠️ Forensic Toolkit
 
 ```
-┌───────────────────────────────────────────────────────────────┐
-│                    FORENSIC TOOLKIT                          │
-├──────────────────┬──────────────────┬─────────────────────────┤
-│   DISK           │   NETWORK        │   MEMORY                │
-│  • Autopsy       │  • Wireshark     │  • Volatility           │
-│  • FTK Imager    │  • VirusTotal    │  • Strings64            │
-│  • Binwalk       │                  │  • malfind / hashdump   │
-│  • Steghide      │                  │                         │
-│  • zsteg         │                  │                         │
-├──────────────────┴──────────────────┴─────────────────────────┤
-│   CRACKING                │   FRAMEWORKS                      │
-│  • John the Ripper        │  • MITRE ATT&CK                   │
-│  • hashcat                │  • NIST CSF                       │
-│                           │  • ISO/IEC 27001                 │
-└───────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                    FORENSIC TOOLKIT                             │
+├──────────────────┬──────────────────┬───────────────────────────┤
+│   DISK           │   NETWORK        │   MEMORY                  │
+│                  │                  │                           │
+│  • Autopsy       │  • Wireshark     │  • Volatility 2/3         │
+│  • FTK Imager    │  • VirusTotal    │  • Strings64              │
+│  • Binwalk       │  • PCAP analysis │  • Windows Findstr        │
+│  • Steghide      │  • DNS/HTTP/TLS  │  • malfind / hashdump     │
+│  • zsteg         │    filtering     │  • memdump / connscan     │
+│                  │                  │                           │
+├──────────────────┴──────────────────┴───────────────────────────┤
+│   CRACKING                │   FRAMEWORKS                        │
+│  • John the Ripper        │  • MITRE ATT&CK                     │
+│  • office2john            │  • NIST Cybersecurity Framework     │
+│  • hashcat                │  • ISO/IEC 27001                    │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
+---
 
 ## 📊 Investigation Summary
 
 | Case | Discipline | Threat | Key IOC | Outcome |
 |------|-----------|--------|---------|---------|
-| 🏦 Bank Fraud | Disk | Insider data theft | `langley` | $5.55M uncovered |
-| 🌐 Network Malware | Network | Info stealer | C2 IP | Full chain mapped |
-| 📄 Malicious PDF | Memory | Credential theft | PID 1752 | Hashes extracted |
+| 🏦 Bank Fraud | Disk Forensics | Insider data theft | Password: `langley` | $5.55M in suspicious transactions uncovered |
+| 🌐 Network Malware | Network Forensics | Agent Tesla / Raccoon Stealer | C2: `45.141.59.212` | Full C2 chain mapped, DLL hash extracted |
+| 📄 Malicious PDF | Memory Forensics | Banking credential stealer | PID 1752 `AcroRd32.exe` | Admin hashes + phishing URLs extracted |
 
 ---
 
@@ -147,18 +151,20 @@ This repository documents practical digital forensics investigations completed a
 
 | Technique ID | Name | Case |
 |-------------|------|------|
-| T1027 | Obfuscation | 🏦 |
-| T1070.006 | Timestomp | 🏦 |
-| T1071.001 | HTTP | 🌐 |
-| T1071.004 | DNS | 🌐 |
-| T1105 | Tool Transfer | 🌐 |
-| T1041 | Exfiltration | 🌐 |
-| T1055 | Injection | 📄 |
-| T1003 | Credential Dumping | 📄 |
+| T1027 | Obfuscated Files or Information | 🏦 Bank Fraud |
+| T1070.006 | Timestomp | 🏦 Bank Fraud |
+| T1071.001 | Application Layer Protocol: HTTP | 🌐 Network |
+| T1071.004 | Application Layer Protocol: DNS | 🌐 Network |
+| T1105 | Ingress Tool Transfer | 🌐 Network |
+| T1041 | Exfiltration Over C2 Channel | 🌐 Network |
+| T1055 | Process Injection | 📄 Memory (PDF) |
+| T1003 | OS Credential Dumping | 📄 Memory (PDF) |
 
 ---
 
 ## 📄 Full Investigation Report
+
+The complete 25-page forensic report covering all three cases with full methodology, screenshots, and findings:
 
 📋 [→ View Full Forensic Report](./Full-Forensic-Report/)
 
@@ -168,12 +174,12 @@ This repository documents practical digital forensics investigations completed a
 
 <div align="center">
 
-**Rohit Aswal**  
-CEH Certified | MSc Cybersecurity  
-University of Salford · Manchester, UK  
+**Rohit Aswal**
+CEH Certified | MSc Cybersecurity, Threat Intelligence & Digital Forensics
+University of Salford · Manchester, UK
 
-[LinkedIn](https://www.linkedin.com/in/rohit-aswal08)  
-[GitHub](https://github.com/rohitaswal2108-Roh)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-rohit--aswal08-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/rohit-aswal08)
+[![GitHub](https://img.shields.io/badge/GitHub-rohitaswal2108--Roh-181717?style=flat-square&logo=github)](https://github.com/rohitaswal2108-Roh)
 
 *🔐 Interests: SOC Analysis · Digital Forensics · Incident Response · Threat Hunting*
 
